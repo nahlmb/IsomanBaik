@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:isomanbangkit/components/IBAppBar.dart';
 import 'package:isomanbangkit/components/IBButtonAccent.dart';
+import 'package:isomanbangkit/view_model/isoman/isoman_home_view_model.dart';
 
 class IsomanHomeView extends StatelessWidget {
+  IsomanHomeViewModel viewModel = Get.put(IsomanHomeViewModel());
+
   @override
   Widget build(BuildContext context) {
+    viewModel.getDaysLeft();
     return Scaffold(
       backgroundColor: Color(0xff389F6E),
       appBar: getIBAppBar(
@@ -79,9 +84,7 @@ class StepButton extends StatelessWidget {
 }
 
 class GreetingSection extends StatelessWidget {
-  const GreetingSection({
-    Key? key,
-  }) : super(key: key);
+  IsomanHomeViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +97,11 @@ class GreetingSection extends StatelessWidget {
             "Sabtu 24 Juli 2021",
             style: TextStyle(fontSize: 14, color: Colors.white),
           ),
-          Text("8 Hari Lagi",
+          Obx(() => Text("${viewModel.dayOn.value} Hari Lagi",
               style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white)),
+                  color: Colors.white))),
           SizedBox(
             height: 34,
           ),
@@ -112,41 +115,47 @@ class GreetingSection extends StatelessWidget {
 }
 
 class DayRow extends StatelessWidget {
-  const DayRow({
-    Key? key,
-  }) : super(key: key);
+  IsomanHomeViewModel viewModel = Get.put(IsomanHomeViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(24),
-      child: Row(
-        //crossAxisAlignment: CrossAxisAlignment,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          DayColumn(
-            day: "Sen",
-          ),
-          DayColumn(
-            day: "Sel",
-          ),
-          DayColumn(
-            day: "Rab",
-          ),
-          DayColumn(
-            day: "Kam",
-          ),
-          DayColumn(
-            day: "Jum",
-          ),
-          DayColumn(
-            day: "Sab",
-          ),
-          DayColumn(
-            day: "Min",
-          ),
-        ],
-      ),
+      child: Obx(() => Row(
+            //crossAxisAlignment: CrossAxisAlignment,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              DayColumn(
+                day: "Sen",
+                week1: viewModel.listDayAsBoolean[0],
+                week2: viewModel.listDayAsBoolean[7],
+              ),
+              DayColumn(
+                  day: "Sel",
+                  week1: viewModel.listDayAsBoolean[1],
+                  week2: viewModel.listDayAsBoolean[8]),
+              DayColumn(
+                  day: "Rab",
+                  week1: viewModel.listDayAsBoolean[2],
+                  week2: viewModel.listDayAsBoolean[9]),
+              DayColumn(
+                  day: "Kam",
+                  week1: viewModel.listDayAsBoolean[3],
+                  week2: viewModel.listDayAsBoolean[10]),
+              DayColumn(
+                  day: "Jum",
+                  week1: viewModel.listDayAsBoolean[4],
+                  week2: viewModel.listDayAsBoolean[11]),
+              DayColumn(
+                  day: "Sab",
+                  week1: viewModel.listDayAsBoolean[5],
+                  week2: viewModel.listDayAsBoolean[12]),
+              DayColumn(
+                  day: "Min",
+                  week1: viewModel.listDayAsBoolean[6],
+                  week2: viewModel.listDayAsBoolean[13]),
+            ],
+          )),
     );
   }
 }
@@ -215,7 +224,8 @@ class CardPanduan extends StatelessWidget {
 
 class DayColumn extends StatelessWidget {
   final String day;
-  const DayColumn({required this.day});
+  final bool week1, week2;
+  const DayColumn({required this.day, this.week1 = false, this.week2 = false});
 
   @override
   Widget build(BuildContext context) {
@@ -232,7 +242,8 @@ class DayColumn extends StatelessWidget {
           width: 30,
           height: 30,
           decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+              color: (week1) ? Colors.white : Colors.black.withOpacity(0.2),
+              shape: BoxShape.circle),
         ),
         SizedBox(
           height: 12,
@@ -241,7 +252,8 @@ class DayColumn extends StatelessWidget {
           width: 30,
           height: 30,
           decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+              color: (week2) ? Colors.white : Colors.black.withOpacity(0.2),
+              shape: BoxShape.circle),
         )
       ],
     );
