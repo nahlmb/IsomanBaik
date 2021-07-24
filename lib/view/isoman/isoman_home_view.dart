@@ -23,7 +23,10 @@ class IsomanHomeView extends StatelessWidget {
                   viewModel.quitIsoman();
                   Get.offNamed(RoutesName.PREVENT_HOME);
                 },
-                child: Icon(Icons.logout))
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Icon(Icons.logout),
+                ))
           ]),
       body: ListView(
         children: [
