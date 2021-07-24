@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isomanbangkit/routes/routes_name.dart';
+import 'package:isomanbangkit/view_model/intro/intro_splash_view_model.dart';
 
 class IntroSplashView extends StatefulWidget {
   @override
@@ -8,10 +9,13 @@ class IntroSplashView extends StatefulWidget {
 }
 
 class _IntroSplashViewState extends State<IntroSplashView> {
+  IntroSplashViewModel viewModel = Get.put(IntroSplashViewModel());
+
   @override
   void initState() {
-    Future.delayed(
-        Duration(seconds: 2), () => Get.offNamed(RoutesName.INTRO_ASK));
+    Future.delayed(Duration(seconds: 2), () {
+      viewModel.checkWhereToGo().then((nextPage) => Get.offNamed(nextPage));
+    });
   }
 
   @override

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isomanbangkit/components/IBButtonAccent.dart';
 import 'package:isomanbangkit/routes/routes_name.dart';
+import 'package:isomanbangkit/view_model/intro/intro_ask_view_model.dart';
 
 class IntroAskView extends StatelessWidget {
+  final IntroAskViewModel viewModel = Get.put(IntroAskViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +44,13 @@ class IntroAskView extends StatelessWidget {
                 width: Get.mediaQuery.size.width,
                 child: IBButtonAccent(
                   "Lanjutkan",
-                  onPressed: () {
-                    Get.offNamed(RoutesName.PREVENT_HOME);
+                  onPressed: () async {
+                    try {
+                      await viewModel.saveUserData();
+                      Get.offNamed(RoutesName.PREVENT_HOME);
+                    } catch (e) {
+                      print(e.toString());
+                    }
                   },
                   color: Colors.white,
                 ),
