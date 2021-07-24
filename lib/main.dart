@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sp_util/sp_util.dart';
 
-void main() {
+void main() async {
+  await SpUtil.getInstance();
   runApp(MyApp());
 }
 
