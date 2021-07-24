@@ -31,7 +31,7 @@ class IntroAskView extends StatelessWidget {
                     height: 12,
                   ),
                   Text(
-                      "Selamat datang di IsomanBaik, melalui aplikasi ini kamu akan dipandu lengkap untuk mencegah Covid19 dan juga kamu akan dipandu menjalani isolasi mandiri jika kamu terpapar.",
+                      "Selamat datang di IsomanBangkit, melalui aplikasi ini kamu akan dipandu lengkap untuk mencegah Covid19 dan juga kamu akan dipandu menjalani isolasi mandiri jika kamu terpapar.",
                       style: TextStyle(color: Colors.white, fontSize: 16))
                 ],
               ),

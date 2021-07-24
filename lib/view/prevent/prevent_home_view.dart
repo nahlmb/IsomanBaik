@@ -241,7 +241,7 @@ class GreetingSection extends StatelessWidget {
             height: 28,
           ),
           Text(
-            "IsomanBaik adalah aplikasi panduan pencegahan dan penanganan isolasi mandiri covid19, jika kamu merasa harus melakukan isoman tekan tombol merah dibawah layar.",
+            "IsomanBangkit adalah aplikasi panduan pencegahan dan penanganan isolasi mandiri covid19, jika kamu merasa harus melakukan isoman tekan tombol merah dibawah layar.",
             style: TextStyle(fontSize: 16),
           )
         ],
