@@ -9,7 +9,7 @@ class CovidDataProvider {
     dio = Dio(BaseOptions(baseUrl: _baseUrl));
   }
 
-  getCovidDataSummary() async {
+  Future<CovidDataModel> getCovidDataSummary() async {
     var response = await dio.get('indonesia');
     return CovidDataModel(
         total: response.data['positif'],
