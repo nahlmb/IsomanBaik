@@ -9,6 +9,7 @@ void main() async {
     debugShowCheckedModeBanner: false,
     theme: appTheme,
     initialRoute: RoutesName.INTRO_SPLASH,
+    defaultTransition: Transition.fadeIn,
     getPages: Routes.routes,
     title: "IsomanBangkit",
   ));
