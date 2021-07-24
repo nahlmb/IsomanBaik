@@ -9,6 +9,6 @@ class IntroAskViewModel extends GetxController {
   }
 
   Future saveUserData() async {
-    await userRepository.addUser("Nahl", 18);
+    await userRepository.addUser("Arif Firmansyah", 18);
   }
 }

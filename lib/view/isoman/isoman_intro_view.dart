@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isomanbangkit/components/IBButtonAccent.dart';
 import 'package:isomanbangkit/routes/routes_name.dart';
+import 'package:isomanbangkit/view_model/isoman/isoman_intro_view_model.dart';
 
 class IsomanIntroView extends StatelessWidget {
+  final IsomanIntroViewModel viewModel = Get.put(IsomanIntroViewModel());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +43,13 @@ class IsomanIntroView extends StatelessWidget {
                 width: Get.mediaQuery.size.width,
                 child: IBButtonAccent(
                   "Mulai Isoman",
-                  onPressed: () {
-                    Get.offNamed(RoutesName.ISOMAN_HOME);
+                  onPressed: () async {
+                    try {
+                      await viewModel.saveIsoman();
+                      Get.offNamed(RoutesName.ISOMAN_HOME);
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                   color: Colors.white,
                 ),

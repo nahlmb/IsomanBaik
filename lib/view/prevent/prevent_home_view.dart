@@ -224,19 +224,18 @@ class RealDivider extends StatelessWidget {
 }
 
 class GreetingSection extends StatelessWidget {
-  const GreetingSection({
-    Key? key,
-  }) : super(key: key);
+  final PreventHomeViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    viewModel.getUserName();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Nahl Basalamah",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+          Obx(() => Text(viewModel.userName.value,
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold))),
           Text("Semoga Sehat Selalu"),
           SizedBox(
             height: 28,

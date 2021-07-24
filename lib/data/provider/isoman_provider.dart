@@ -11,6 +11,7 @@ class IsomanProvider {
       final DateFormat formatter = DateFormat('yyyy-MM-dd');
       final String startDate = formatter.format(now);
       final String endDate = formatter.format(now.add(Duration(days: 14)));
+      await SpUtil.putBool("is_isoman", true);
       await SpUtil.putString("isoman_start_date", startDate);
       await SpUtil.putString("isoman_end_date", endDate);
     }
