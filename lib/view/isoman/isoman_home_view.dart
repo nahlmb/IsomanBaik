@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isomanbangkit/components/IBAppBar.dart';
 import 'package:isomanbangkit/components/IBButtonAccent.dart';
+import 'package:isomanbangkit/routes/routes_name.dart';
 import 'package:isomanbangkit/view_model/isoman/isoman_home_view_model.dart';
 
 class IsomanHomeView extends StatelessWidget {
@@ -15,7 +16,15 @@ class IsomanHomeView extends StatelessWidget {
       appBar: getIBAppBar(
           logoColored: false,
           backgroundColor: Color(0xff389F6E),
-          border: false),
+          border: false,
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  viewModel.quitIsoman();
+                  Get.offNamed(RoutesName.PREVENT_HOME);
+                },
+                child: Icon(Icons.logout))
+          ]),
       body: ListView(
         children: [
           GreetingSection(),

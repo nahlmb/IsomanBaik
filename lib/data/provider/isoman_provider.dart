@@ -44,7 +44,7 @@ class IsomanProvider {
 
   deleteIsoman() async {
     await SpUtil.getInstance();
-    await SpUtil.putBool('isIsoman', false);
+    await SpUtil.putBool('is_isoman', false);
     await SpUtil.putString("isoman_start_date", "");
     await SpUtil.putString("isoman_end_date", "");
   }

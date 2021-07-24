@@ -43,4 +43,8 @@ class IsomanHomeViewModel extends GetxController {
     }
     return null;
   }
+
+  quitIsoman() {
+    return isomanRepository.deleteIsoman();
+  }
 }
