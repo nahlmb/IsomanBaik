@@ -4,12 +4,14 @@ import 'package:sp_util/sp_util.dart';
 class UserProvider {
   addUser(
       {required String name, required int age, bool isIsoman = false}) async {
+    await SpUtil.getInstance();
     await SpUtil.putString('user_name', name);
     await SpUtil.putInt('user_age', age);
     await SpUtil.putBool('is_isoman', isIsoman);
   }
 
-  UserModel? getUser() {
+  Future<UserModel?> getUser() async {
+    await SpUtil.getInstance();
     String name = SpUtil.getString("user_name", defValue: "")!;
     int usia = SpUtil.getInt("user_age", defValue: 0)!;
     bool isIsoman = SpUtil.getBool("is_isoman", defValue: false)!;
@@ -21,12 +23,15 @@ class UserProvider {
 
   updateUser(
       {required String name, required int age, required bool isIsoman}) async {
+    SpUtil.getInstance();
+
     await SpUtil.putString('user_name', name);
     await SpUtil.putInt('user_age', age);
     await SpUtil.putBool('is_isoman', isIsoman);
   }
 
   deleteUser() async {
+    SpUtil.getInstance();
     await SpUtil.putString('user_name', "");
     await SpUtil.putInt('user_age', 0);
     await SpUtil.putBool('is_isoman', false);

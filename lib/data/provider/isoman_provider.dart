@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 class IsomanProvider {
   addIsoman() async {
+    await SpUtil.getInstance();
     bool isIsoman = SpUtil.getBool("is_isoman", defValue: false)!;
     if (!isIsoman) {
       final DateTime now = DateTime.now();
@@ -15,7 +16,8 @@ class IsomanProvider {
     }
   }
 
-  IsomanModel? getIsoman() {
+  Future<IsomanModel?> getIsoman() async {
+    await SpUtil.getInstance();
     bool isIsoman = SpUtil.getBool("is_isoman", defValue: false)!;
     if (isIsoman) {
       DateTime startDate =
@@ -27,6 +29,7 @@ class IsomanProvider {
   }
 
   updateIsoman(String startDate) async {
+    await SpUtil.getInstance();
     bool isIsoman = SpUtil.getBool("is_isoman", defValue: false)!;
     if (isIsoman) {
       DateTime time = DateTime.parse(startDate);
@@ -39,6 +42,7 @@ class IsomanProvider {
   }
 
   deleteIsoman() async {
+    await SpUtil.getInstance();
     await SpUtil.putBool('isIsoman', false);
     await SpUtil.putString("isoman_start_date", "");
     await SpUtil.putString("isoman_end_date", "");

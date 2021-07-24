@@ -5,7 +5,7 @@ class UserRepository {
   UserProvider provider;
   UserRepository({required this.provider});
 
-  UserModel? getUser() {
+  Future<UserModel?> getUser() {
     return provider.getUser();
   }
 
