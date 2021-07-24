@@ -11,7 +11,7 @@ class _IntroSplashViewState extends State<IntroSplashView> {
   @override
   void initState() {
     Future.delayed(
-        Duration(seconds: 2), () => Get.toNamed(RoutesName.ISOMAN_HOME));
+        Duration(seconds: 2), () => Get.offNamed(RoutesName.INTRO_ASK));
   }
 
   @override

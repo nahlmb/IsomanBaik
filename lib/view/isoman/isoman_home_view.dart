@@ -1,24 +1,152 @@
 import 'package:flutter/material.dart';
 import 'package:isomanbangkit/components/IBAppBar.dart';
+import 'package:isomanbangkit/components/IBButtonAccent.dart';
 
 class IsomanHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getIBAppBar(),
-      body: SafeArea(
-          child: Stack(alignment: Alignment.center, children: [
-        ListView(
-          children: [
-            GreetingSection(),
-            RealDivider(),
-            CovidDataSection(),
-            RealDivider(),
-            PanduanSection()
-          ],
+      backgroundColor: Color(0xff389F6E),
+      appBar: getIBAppBar(
+          logoColored: false,
+          backgroundColor: Color(0xff389F6E),
+          border: false),
+      body: ListView(
+        children: [
+          GreetingSection(),
+          DayRow(),
+          PanduanSection(),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                StepButton(),
+                SizedBox(
+                  height: 18,
+                ),
+                StepButton()
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 48,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: IBButtonAccent("Test Gejala",
+                color: Color(0xff4BB481),
+                textColor: Colors.white,
+                onPressed: () {}),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: IBButtonAccent("Telpon & Link Cepat", onPressed: () {}),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class StepButton extends StatelessWidget {
+  const StepButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          "Panduan Isolasi Mandiri",
+          style: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        WarnButton()
-      ])),
+        SizedBox(
+          width: 12,
+        ),
+        Icon(
+          Icons.chevron_right,
+          color: Colors.white,
+        )
+      ],
+    );
+  }
+}
+
+class GreetingSection extends StatelessWidget {
+  const GreetingSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Sabtu 24 Juli 2021",
+            style: TextStyle(fontSize: 14, color: Colors.white),
+          ),
+          Text("8 Hari Lagi",
+              style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white)),
+          SizedBox(
+            height: 34,
+          ),
+          Text(
+              "Tetaplah tenang, Jaga imunitas, bersabarlah dan mohonlah pertolongan kepada Yang Maha Esa.",
+              style: TextStyle(fontSize: 18, color: Colors.white)),
+        ],
+      ),
+    );
+  }
+}
+
+class DayRow extends StatelessWidget {
+  const DayRow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Row(
+        //crossAxisAlignment: CrossAxisAlignment,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          DayColumn(
+            day: "Sen",
+          ),
+          DayColumn(
+            day: "Sel",
+          ),
+          DayColumn(
+            day: "Rab",
+          ),
+          DayColumn(
+            day: "Kam",
+          ),
+          DayColumn(
+            day: "Jum",
+          ),
+          DayColumn(
+            day: "Sab",
+          ),
+          DayColumn(
+            day: "Min",
+          ),
+        ],
+      ),
     );
   }
 }
@@ -39,21 +167,21 @@ class PanduanSection extends StatelessWidget {
             padding: const EdgeInsets.only(left: 24, right: 24),
             child: Text(
               "Panduan Pencegahan",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
             height: 24,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.25,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                children: [CardPanduan(), CardPanduan(), CardPanduan()],
-              ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: [CardPanduan(), CardPanduan(), CardPanduan()],
             ),
           )
         ],
@@ -70,173 +198,52 @@ class CardPanduan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 12),
+      padding: const EdgeInsets.only(
+        left: 16,
+      ),
       child: AspectRatio(
         aspectRatio: 1,
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Colors.grey.shade300),
+              color: Colors.white.withOpacity(0.15)),
         ),
       ),
     );
   }
 }
 
-class WarnButton extends StatelessWidget {
-  const WarnButton({
-    Key? key,
-  }) : super(key: key);
+class DayColumn extends StatelessWidget {
+  final String day;
+  const DayColumn({required this.day});
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 18,
-      child: ElevatedButton(
-        onPressed: () async {},
-        child: Icon(
-          Icons.error,
-          color: Colors.white,
-          size: 32,
+    return Column(
+      children: [
+        Text(
+          day,
+          style: TextStyle(fontSize: 14, color: Colors.white),
         ),
-        style: ElevatedButton.styleFrom(
-          shape: CircleBorder(),
-          primary: Color(0xFFDE4C43),
-          padding: EdgeInsets.all(12),
+        SizedBox(
+          height: 12,
         ),
-      ),
-    );
-  }
-}
-
-class CovidDataSection extends StatelessWidget {
-  const CovidDataSection({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Data Covid19 Indonesia",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 18,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Kasus",
-                ),
-                Text(
-                  "-",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Kasus",
-                ),
-                Text(
-                  "-",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Kasus",
-                ),
-                Text(
-                  "-",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Divider(),
-          SizedBox(
-            height: 18,
-          ),
-          Center(
-            child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Selengkapnya",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.transparent,
-                    elevation: 0,
-                    primary: Color(0xff389F6E),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24.0)))),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class RealDivider extends StatelessWidget {
-  const RealDivider({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      height: 0,
-      color: Colors.grey.shade400,
-    );
-  }
-}
-
-class GreetingSection extends StatelessWidget {
-  const GreetingSection({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Nahl Basalamah",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-          Text("Semoga Sehat Selalu"),
-          SizedBox(
-            height: 28,
-          ),
-          Text(
-            "IsomanBaik adalah aplikasi panduan pencegahan dan penanganan isolasi mandiri covid19, jika kamu merasa harus melakukan isoman tekan tombol merah dibawah layar.",
-            style: TextStyle(fontSize: 16),
-          )
-        ],
-      ),
+        Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.2), shape: BoxShape.circle),
+        )
+      ],
     );
   }
 }
