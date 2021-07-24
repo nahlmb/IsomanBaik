@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isomanbangkit/components/IBAppBar.dart';
 import 'package:isomanbangkit/routes/routes_name.dart';
+import 'package:isomanbangkit/view_model/prevent/prevent_home_view_model.dart';
 
 class PreventHomeView extends StatelessWidget {
+  PreventHomeViewModel viewModel = Get.put(PreventHomeViewModel());
+
   @override
   Widget build(BuildContext context) {
+    viewModel.getCovidDataSummary();
     return Scaffold(
       appBar: getIBAppBar(),
       body: SafeArea(
@@ -115,91 +119,92 @@ class WarnButton extends StatelessWidget {
 }
 
 class CovidDataSection extends StatelessWidget {
-  const CovidDataSection({
-    Key? key,
-  }) : super(key: key);
+  PreventHomeViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Data Covid19 Indonesia",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 18,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Kasus",
+      child: Obx(() => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Data Covid19 Indonesia",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total Kasus",
+                    ),
+                    Text(
+                      viewModel.data.value.total.toString(),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
-                Text(
-                  "-",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Kasus",
+              ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Sembuh",
+                    ),
+                    Text(
+                      viewModel.data.value.sembuh.toString(),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
-                Text(
-                  "-",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Total Kasus",
+              ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Meninggal",
+                    ),
+                    Text(
+                      viewModel.data.value.meninggal.toString(),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
-                Text(
-                  "-",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Divider(),
-          SizedBox(
-            height: 18,
-          ),
-          Center(
-            child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Selengkapnya",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                    shadowColor: Colors.transparent,
-                    elevation: 0,
-                    primary: Color(0xff389F6E),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24.0)))),
-          ),
-        ],
-      ),
+              ),
+              Divider(),
+              SizedBox(
+                height: 18,
+              ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Selengkapnya",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        shadowColor: Colors.transparent,
+                        elevation: 0,
+                        primary: Color(0xff389F6E),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.0)))),
+              ),
+            ],
+          )),
     );
   }
 }
